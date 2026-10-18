@@ -1,4 +1,4 @@
-# MEMOVIA for Moodle (local_memovia)
+# MEMOVIA (local_memovia)
 
 Moodle local plugin for [MEMOVIA](https://memovia.io), the service that makes course materials accessible to the
 whole class (read aloud, adapted reading, revision sheets) instead of giving a separate tool to a few learners.
@@ -19,8 +19,12 @@ In every course that contains a MEMOVIA activity (an LTI 1.3 external tool regis
 ## Requirements
 
 - Moodle 4.5 (LTS) or 5.0.
+- A MEMOVIA subscription for the institution. The plugin does nothing on its own: it connects Moodle to the MEMOVIA
+  service, which is paid for per institution.
 - The MEMOVIA external tool registered on the site with LTI 1.3 dynamic registration (the registration URL is given
   by MEMOVIA to the institution).
+
+The plugin ships with English strings only; translations are managed on [AMOS](https://lang.moodle.org).
 
 ## Installation
 

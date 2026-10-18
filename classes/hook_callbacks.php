@@ -95,8 +95,7 @@ class hook_callbacks {
             ],
         ];
         $json = json_encode($data, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT);
-        $jsurl = new \moodle_url('/local/memovia/js/buttons.js', ['v' => get_config('local_memovia', 'version')]);
-        $hook->add_html(\html_writer::tag('script', $json, ['type' => 'application/json', 'id' => 'local-memovia-data'])
-            . \html_writer::script('', $jsurl));
+        $hook->add_html(\html_writer::tag('script', $json, ['type' => 'application/json', 'id' => 'local-memovia-data']));
+        $PAGE->requires->js_call_amd('local_memovia/buttons', 'init');
     }
 }

@@ -25,9 +25,9 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'local_memovia';
-$plugin->version = 2026101804;
+$plugin->version = 2026101805;
 $plugin->requires = 2024100700; // Moodle 4.5.
 $plugin->supported = [405, 500];
 $plugin->maturity = MATURITY_BETA;
-$plugin->release = '0.2.1';
+$plugin->release = '0.2.2';
 $plugin->dependencies = ['mod_lti' => ANY_VERSION];
