@@ -44,10 +44,14 @@ class provider implements
         $collection->add_external_location_link('memovia', [
             'userid' => 'privacy:metadata:memovia:userid',
             'files' => 'privacy:metadata:memovia:files',
+            'coursenames' => 'privacy:metadata:memovia:coursenames',
         ], 'privacy:metadata:memovia');
         $collection->add_external_location_link('azure_document_intelligence', [
             'files' => 'privacy:metadata:azure:files',
         ], 'privacy:metadata:azure');
+        $collection->add_external_location_link('azure_ai_speech', [
+            'files' => 'privacy:metadata:azurespeech:files',
+        ], 'privacy:metadata:azurespeech');
         return $collection;
     }
 
