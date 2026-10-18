@@ -75,8 +75,14 @@ class client {
      * @param string $title title of the MEMOVIA note (activity name for a resource, file name in a folder)
      * @return array
      */
-    public function ingest(string $contextid, string $coursetitle, int $cmid, string $filekey, \stored_file $file,
-            string $title = ''): array {
+    public function ingest(
+        string $contextid,
+        string $coursetitle,
+        int $cmid,
+        string $filekey,
+        \stored_file $file,
+        string $title = ''
+    ): array {
         return $this->call([
             'action' => 'ingest', 'context_id' => $contextid, 'course_title' => $coursetitle, 'cm_id' => (string) $cmid,
             'title' => $title,

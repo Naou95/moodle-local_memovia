@@ -26,10 +26,18 @@ defined('MOODLE_INTERNAL') || die();
 
 if ($hassiteconfig) {
     $settings = new admin_settingpage('local_memovia', new lang_string('pluginname', 'local_memovia'));
-    $settings->add(new admin_setting_configcheckbox('local_memovia/enabled',
-        new lang_string('enabled', 'local_memovia'), new lang_string('enabled_desc', 'local_memovia'), 0));
-    $settings->add(new admin_setting_configtext('local_memovia/apiurl',
-        new lang_string('apiurl', 'local_memovia'), new lang_string('apiurl_desc', 'local_memovia'),
-        'https://app.memovia.io', PARAM_URL));
+    $settings->add(new admin_setting_configcheckbox(
+        'local_memovia/enabled',
+        new lang_string('enabled', 'local_memovia'),
+        new lang_string('enabled_desc', 'local_memovia'),
+        0
+    ));
+    $settings->add(new admin_setting_configtext(
+        'local_memovia/apiurl',
+        new lang_string('apiurl', 'local_memovia'),
+        new lang_string('apiurl_desc', 'local_memovia'),
+        'https://app.memovia.io',
+        PARAM_URL
+    ));
     $ADMIN->add('localplugins', $settings);
 }

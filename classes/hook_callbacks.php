@@ -48,8 +48,10 @@ class hook_callbacks {
         $tool = sync::tool_for_course($course);
         if (!$tool && $teacher && !$isfolder && count(sync::tools_in_course($course)) > 1) {
             // Regional Moodle: two MEMOVIA tools (two CFA) in this course and no way to choose: nothing is sent.
-            $hook->add_html(\html_writer::div(get_string('banner_twotools', 'local_memovia'),
-                'alert alert-warning local-memovia-banner'));
+            $hook->add_html(\html_writer::div(
+                get_string('banner_twotools', 'local_memovia'),
+                'alert alert-warning local-memovia-banner'
+            ));
             return;
         }
         if (!$tool || !sync::activation_cm($course, $tool)) {

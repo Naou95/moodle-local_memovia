@@ -98,9 +98,16 @@ final class sync_test extends \advanced_testcase {
         $gen = $this->getDataGenerator();
         $course = $gen->create_course();
         $res = $gen->create_module('resource', ['course' => $course->id, 'defaultfilename' => 'cours.pdf']);
-        $client = new class('https://app.memovia.io', 'c') extends client {
+        $client = new class ('https://app.memovia.io', 'c') extends client {
             /** @var array calls */
             public $calls = [];
+            /**
+             * Records the call instead of sending it.
+             *
+             * @param array $params
+             * @param bool $multipart
+             * @return array
+             */
             protected function call(array $params, bool $multipart = false): array {
                 $this->calls[] = $params['action'];
                 if ($params['action'] === 'status') {
@@ -129,9 +136,16 @@ final class sync_test extends \advanced_testcase {
         $this->assertSame([], $client->calls);
         $this->assertSame('cached', $r['class']);
         // Another MEMOVIA tool (preview to production, new registration): MEMOVIA is asked again at once.
-        $other = new class('https://app.memovia.io', 'other-client') extends client {
+        $other = new class ('https://app.memovia.io', 'other-client') extends client {
             /** @var array calls */
             public $calls = [];
+            /**
+             * Records the call instead of sending it.
+             *
+             * @param array $params
+             * @param bool $multipart
+             * @return array
+             */
             protected function call(array $params, bool $multipart = false): array {
                 $this->calls[] = $params['action'];
                 return ['class' => 'NO_CLASS_YET', 'files' => []];

@@ -56,7 +56,8 @@ final class hook_test extends \advanced_testcase {
 
         $this->setAdminUser();
         $id = $gen->get_plugin_generator('mod_lti')->create_tool_types(
-            ['name' => 'MEMOVIA', 'baseurl' => 'https://app.memovia.io/lti/launch']);
+            ['name' => 'MEMOVIA', 'baseurl' => 'https://app.memovia.io/lti/launch']
+        );
         $DB->set_field('lti_types', 'ltiversion', '1.3.0', ['id' => $id]);
         $DB->set_field('lti_types', 'clientid', 'client-x', ['id' => $id]);
         $DB->set_field('lti_types', 'state', 1, ['id' => $id]);
@@ -79,8 +80,11 @@ final class hook_test extends \advanced_testcase {
         $this->assertMatchesRegularExpression('/id="local-memovia-data"/', $html);
         preg_match('#<script type="application/json" id="local-memovia-data">(.*?)</script>#s', $html, $m);
         $data = json_decode($m[1], true);
-        $this->assertSame(['501'], array_map('strval', array_keys($data['files'])),
-            'learner: adapted files only, never hidden ones');
+        $this->assertSame(
+            ['501'],
+            array_map('strval', array_keys($data['files'])),
+            'learner: adapted files only, never hidden ones'
+        );
         $this->assertSame('', $data['banner']);
 
         set_config('enabled', 0, 'local_memovia');

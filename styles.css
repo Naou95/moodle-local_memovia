@@ -19,6 +19,7 @@
 .local-memovia-banner {
     margin-bottom: 1rem;
 }
+
 @media (max-width: 575.98px) {
     .local-memovia-open.btn {
         margin: .5rem 0 0;

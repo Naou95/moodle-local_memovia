@@ -49,34 +49,42 @@ if ($note !== '') {
     // A notification link carries no sesskey (it comes from an e-mail): a confirmation page posts it. The link only works
     // through the course's MEMOVIA activity, and MEMOVIA only accepts a note shared to this course's class (intent).
     $uuid = '/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/';
-    if (!preg_match($uuid, $note) || (int) $activation->id !== (int) $cm->id
-            || !get_config('local_memovia', 'enabled') || !\core_availability\info_module::is_user_visible($cm, $USER->id)) {
+    if (
+        !preg_match($uuid, $note) || (int) $activation->id !== (int) $cm->id
+            || !get_config('local_memovia', 'enabled') || !\core_availability\info_module::is_user_visible($cm, $USER->id)
+    ) {
         throw new moodle_exception('err_notready', 'local_memovia', $back);
     }
     if (!data_submitted() || !confirm_sesskey()) {
         $PAGE->set_context($context);
         $PAGE->set_title(get_string('open', 'local_memovia'));
         echo $OUTPUT->header();
-        echo $OUTPUT->confirm(get_string('open_confirm', 'local_memovia'),
+        echo $OUTPUT->confirm(
+            get_string('open_confirm', 'local_memovia'),
             new single_button(
                 new moodle_url('/local/memovia/open.php', ['cmid' => $cmid, 'note' => $note]),
                 get_string('open', 'local_memovia'),
                 'post',
                 single_button::BUTTON_PRIMARY
             ),
-            $back);
+            $back
+        );
         echo $OUTPUT->footer();
         exit;
     }
     $noteid = $note;
 } else {
     require_sesskey();
-    if (!get_config('local_memovia', 'enabled') || !sync::visible_to_all($cm)
-            || !\core_availability\info_module::is_user_visible($cm, $USER->id)) {
+    if (
+        !get_config('local_memovia', 'enabled') || !sync::visible_to_all($cm)
+            || !\core_availability\info_module::is_user_visible($cm, $USER->id)
+    ) {
         throw new moodle_exception('err_notready', 'local_memovia', $back);
     }
-    $row = $DB->get_record('local_memovia_file',
-        ['courseid' => $course->id, 'cmid' => $cm->id, 'filekey' => $key, 'status' => 'ready']);
+    $row = $DB->get_record(
+        'local_memovia_file',
+        ['courseid' => $course->id, 'cmid' => $cm->id, 'filekey' => $key, 'status' => 'ready']
+    );
     if (!$row || empty($row->noteid)) {
         throw new moodle_exception('err_notready', 'local_memovia', $back);
     }

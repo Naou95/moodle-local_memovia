@@ -35,15 +35,29 @@ final class notify_test extends \advanced_testcase {
      * @return client
      */
     private function client(array $events): client {
-        return new class('https://app.memovia.io', 'c', $events) extends client {
+        return new class ('https://app.memovia.io', 'c', $events) extends client {
             /** @var array */
             public $events;
             /** @var array */
             public $calls = [];
+            /**
+             * Fake client with canned events.
+             *
+             * @param string $apiurl
+             * @param string $clientid
+             * @param array $events
+             */
             public function __construct(string $apiurl, string $clientid, array $events) {
                 parent::__construct($apiurl, $clientid);
                 $this->events = $events;
             }
+            /**
+             * Records the call instead of sending it.
+             *
+             * @param array $params
+             * @param bool $multipart
+             * @return array
+             */
             protected function call(array $params, bool $multipart = false): array {
                 $this->calls[] = $params;
                 return ['events' => $params['since'] === '' ? [] : $this->events, 'cursor' => '2026-10-18T13:00:00.123456+00:00'];

@@ -92,8 +92,10 @@ final class sync {
         if (count($tools) <= 1) {
             return $tools ? reset($tools) : null;
         }
-        $mine = array_filter($tools, fn($t) => $DB->record_exists('lti_types_categories',
-            ['typeid' => $t->id, 'categoryid' => $course->category]));
+        $mine = array_filter($tools, fn($t) => $DB->record_exists(
+            'lti_types_categories',
+            ['typeid' => $t->id, 'categoryid' => $course->category]
+        ));
         return count($mine) === 1 ? reset($mine) : null;
     }
 
@@ -211,10 +213,15 @@ final class sync {
         }
         $fingerprint = sha1($client->tool_key() . json_encode($list)); // Another tool or address: asked again at once.
         $state = $DB->get_record('local_memovia_course', ['courseid' => $course->id]);
-        $waiting = $DB->record_exists_select('local_memovia_file',
-            "courseid = ? AND status IN ('pending', 'processing')", [$course->id]);
-        if (!$force && $state && $state->fingerprint === $fingerprint && $state->classstatus === 'ok' && !$waiting
-                && $state->lastcheck > time() - HOURSECS) {
+        $waiting = $DB->record_exists_select(
+            'local_memovia_file',
+            "courseid = ? AND status IN ('pending', 'processing')",
+            [$course->id]
+        );
+        if (
+            !$force && $state && $state->fingerprint === $fingerprint && $state->classstatus === 'ok' && !$waiting
+                && $state->lastcheck > time() - HOURSECS
+        ) {
             $result['skipped'] = count($list);
             return $result;
         }
@@ -310,8 +317,10 @@ final class sync {
         $state = $DB->get_record('local_memovia_course', ['courseid' => $course->id]);
         $cursor = $state ? (string) $state->eventscursor : '';
         $answer = $client->events(self::context_id($course), $cursor);
-        $events = $cursor === '' ? [] : array_values(array_filter($answer['events'] ?? [],
-            fn($e) => is_array($e) && preg_match('/^[0-9a-f-]{36}$/', (string) ($e['note_id'] ?? ''))));
+        $events = $cursor === '' ? [] : array_values(array_filter(
+            $answer['events'] ?? [],
+            fn($e) => is_array($e) && preg_match('/^[0-9a-f-]{36}$/', (string) ($e['note_id'] ?? ''))
+        ));
         $next = substr((string) ($answer['cursor'] ?? ''), 0, 40);
         if ($next !== '' && $next !== $cursor) {
             $record = $state ?: (object) ['courseid' => $course->id, 'classstatus' => '', 'fingerprint' => '', 'lastcheck' => 0];
