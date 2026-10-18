@@ -1,11 +1,11 @@
 # MEMOVIA (local_memovia)
 
 Moodle local plugin for [MEMOVIA](https://memovia.io), the service that makes course materials accessible to the
-whole class (read aloud, adapted reading, revision sheets) instead of giving a separate tool to a few learners.
+whole class (read aloud, adapted reading) instead of giving a separate tool to a few learners.
 
 In every course that contains a MEMOVIA activity (an LTI 1.3 external tool registered on the site), the plugin:
 
-- sends the PDF, DOCX and PPTX files **visible to everyone** to MEMOVIA, which adapts them and shares them with the class;
+- sends the PDF, DOCX and PPTX files of File and Folder resources **visible to everyone** to MEMOVIA, which adapts them and shares them with the class;
 - adds an **Open with MEMOVIA** button next to each adapted file;
 - notifies learners through Moodle messaging when their teacher shares new MEMOVIA content with the class.
 
@@ -13,8 +13,13 @@ In every course that contains a MEMOVIA activity (an LTI 1.3 external tool regis
 
 - Only files of a visible course, in a visible activity shown on the course page, with no access restriction on the
   activity or its section. Hidden or restricted files and images are never sent.
-- When a user opens a file with MEMOVIA, their Moodle user id is sent through the LTI launch to open the right file.
-- Data is processed in the EU. See the Privacy API metadata of the plugin for the full list.
+- The course full name and resource names are sent with the files, to name them in MEMOVIA.
+- When a user opens a file with MEMOVIA, the plugin sends their Moodle user id to MEMOVIA so that their next LTI
+  launch opens the right file.
+- Names, roles and course membership reach MEMOVIA through the LTI 1.3 services of the External tool activity
+  (`mod_lti`), as for any LTI tool.
+- Data is processed in the EU. MEMOVIA extracts the text with Microsoft Azure Document Intelligence and reads it aloud
+  with Microsoft Azure AI Speech (EU regions). See the Privacy API metadata of the plugin.
 
 ## Requirements
 
@@ -35,6 +40,8 @@ The plugin ships with English strings only; translations are managed on [AMOS](h
 3. Check that **MEMOVIA address** is the address of the registered MEMOVIA tool (default `https://app.memovia.io`).
 4. Tick **Send course files to MEMOVIA**. It is off by default; untick it to stop all sending (for example at the
    end of a contract).
+5. In each course, add the MEMOVIA external tool activity (visible) and open it once: this creates the
+   class in MEMOVIA, and files are sent from then on.
 
 Authentication: every call is signed with the site's LTI key (the `mod_lti` key); MEMOVIA checks it with the public
 key received at registration. There is no secret to type.
