@@ -1,0 +1,28 @@
+/* local_memovia: "Open with MEMOVIA" button and banner. Touch target of at least 44 px. */
+/* position + z-index: the Moodle course page stretches the activity link over its whole row (.stretched-link);
+   without this, a click on the button opened the file instead of MEMOVIA. */
+.local-memovia-open.btn {
+    position: relative;
+    z-index: 3;
+    margin-left: .5rem;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+}
+.local-memovia-badge {
+    position: relative;
+    z-index: 3;
+    margin-left: .5rem;
+    white-space: normal;
+}
+.local-memovia-banner {
+    margin-bottom: 1rem;
+}
+@media (max-width: 575.98px) {
+    .local-memovia-open.btn {
+        margin: .5rem 0 0;
+        width: 100%;
+        justify-content: center;
+    }
+}
