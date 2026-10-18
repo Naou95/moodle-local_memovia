@@ -220,7 +220,7 @@ final class sync {
         }
 
         $answer = $client->status($contextid, $list);
-        $record = $state ?: (object) ['courseid' => $course->id];
+        $record = $state ?: (object) ['courseid' => $course->id, 'eventscursor' => ''];
         $record->classstatus = ($answer['class'] ?? '') === 'ok' ? 'ok' : 'NO_CLASS_YET';
         $record->fingerprint = $fingerprint;
         $record->lastcheck = time();

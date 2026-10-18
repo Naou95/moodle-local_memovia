@@ -34,7 +34,7 @@ function xmldb_local_memovia_upgrade($oldversion) {
     if ($oldversion < 2026101803) {
         // Cursor of the notifications (lot B): empty = never asked, the first pass sends no history.
         $table = new xmldb_table('local_memovia_course');
-        $field = new xmldb_field('eventscursor', XMLDB_TYPE_CHAR, '40', null, XMLDB_NOTNULL, null, '', 'lastcheck');
+        $field = new xmldb_field('eventscursor', XMLDB_TYPE_CHAR, '40', null, XMLDB_NOTNULL, null, null, 'lastcheck');
         if (!$dbman->field_exists($table, $field)) {
             $dbman->add_field($table, $field);
         }

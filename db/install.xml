@@ -9,7 +9,7 @@
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
         <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="cmid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="filekey" TYPE="char" LENGTH="1333" NOTNULL="true" DEFAULT="" SEQUENCE="false" COMMENT="Empty for the main file of a resource, filepath+filename in a folder"/>
+        <FIELD NAME="filekey" TYPE="char" LENGTH="1333" NOTNULL="true" SEQUENCE="false" COMMENT="Empty for the main file of a resource, filepath+filename in a folder"/>
         <FIELD NAME="contenthash" TYPE="char" LENGTH="40" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="status" TYPE="char" LENGTH="20" NOTNULL="true" SEQUENCE="false" COMMENT="pending, processing, ready, failed, too_large, hidden"/>
         <FIELD NAME="noteid" TYPE="char" LENGTH="36" NOTNULL="false" SEQUENCE="false"/>
@@ -28,10 +28,10 @@
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
         <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="classstatus" TYPE="char" LENGTH="20" NOTNULL="true" DEFAULT="" SEQUENCE="false" COMMENT="ok or NO_CLASS_YET"/>
-        <FIELD NAME="fingerprint" TYPE="char" LENGTH="40" NOTNULL="true" DEFAULT="" SEQUENCE="false"/>
+        <FIELD NAME="classstatus" TYPE="char" LENGTH="20" NOTNULL="true" SEQUENCE="false" COMMENT="ok or NO_CLASS_YET"/>
+        <FIELD NAME="fingerprint" TYPE="char" LENGTH="40" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="lastcheck" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
-        <FIELD NAME="eventscursor" TYPE="char" LENGTH="40" NOTNULL="true" DEFAULT="" SEQUENCE="false" COMMENT="MEMOVIA time of the last notified content (empty: never asked)"/>
+        <FIELD NAME="eventscursor" TYPE="char" LENGTH="40" NOTNULL="true" SEQUENCE="false" COMMENT="MEMOVIA time of the last notified content (empty: never asked)"/>
       </FIELDS>
       <KEYS>
         <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
