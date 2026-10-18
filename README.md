@@ -40,7 +40,7 @@ The plugin ships with English strings only; translations are managed on [AMOS](h
 3. Check that **MEMOVIA address** is the address of the registered MEMOVIA tool (default `https://app.memovia.io`).
 4. Tick **Send course files to MEMOVIA**. It is off by default; untick it to stop all sending (for example at the
    end of a contract).
-5. In each course, add the MEMOVIA external tool activity (visible) and open it once: this creates the
+5. In each course, add the MEMOVIA external tool activity (visible) and open it once as a teacher: this creates the
    class in MEMOVIA, and files are sent from then on.
 
 Authentication: every call is signed with the site's LTI key (the `mod_lti` key); MEMOVIA checks it with the public
